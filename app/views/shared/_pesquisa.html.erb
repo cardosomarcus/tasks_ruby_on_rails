@@ -1,0 +1,47 @@
+
+<nav class="navbar navbar-light bg-light">
+<div style="float: left">
+<%= form_with(url: pesquisar_path, local: true, method: :get, class:"form-inline") do |form| %>
+ 
+  <%= form.text_field :termo, class:"form-control mr-sm-2", placeholder:"Pesquisar tarefas..." %>
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+  
+<% end %>
+</div>
+<div style="float: right">
+<%= link_to "Perfil", edit_user_registration_path, class:"navbar-brand" %>
+<%= link_to "Sair", destroy_user_session_path, method: :delete, class:"navbar-brand" %>
+</div>
+</nav>
+<p id="notice"><%= notice %></p>
+
+
+
+<h1 style="text-align: center"><%= link_to 'Atividades', atividades_path %></h1>
+<%= link_to 'Criar tarefa', new_atividade_path, style:"color: white", class:"btn btn-info btn-lg btn-block" %>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Descrição</th>
+      <th>Concluída?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @atividades.each do |atividade| %>
+      <tr>
+        <td style="width: 60%"><%= atividade.descricao %></td>
+        <td style="width: 20%"><%= atividade.status %></td>
+        <!--<td><%= link_to 'Visualizar', atividade %></td> -->
+         <td style="width: 10%"><%= link_to 'Editar', edit_atividade_path(atividade) %></td> 
+        <td style="width: 10%"><%= link_to 'Remover', atividade, method: :delete, data: { confirm: 'Você deseja realmente excluir?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
